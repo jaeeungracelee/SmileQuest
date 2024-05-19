@@ -14,6 +14,9 @@ app.post('/chat', async (req, res) => {
   const { message } = req.body;
   
   try {
+    console.log("hello");
+    console.log(process.env.OPENAI_API_KEY);
+    console.log("hello");
     const response = await axios.post(
       'https://api.openai.com/v1/chat/completions', // Update the endpoint
       {
