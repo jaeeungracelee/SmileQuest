@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity } from 'react-native';
 import { Checkbox } from 'react-native-paper';
+import { styles } from './styles'; // Assuming the styles are in a separate file named 'styles.ts'
 
 type Quest = {
   id: string;
@@ -66,60 +67,9 @@ const QuestsScreen = () => {
         <TouchableOpacity style={styles.button}>
           <Text style={styles.buttonText}>Start Quest</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Take a Picture</Text>
-        </TouchableOpacity>
       </View>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 16,
-    backgroundColor: '#f5f5f5',
-  },
-  title: {
-    fontSize: 24,
-    marginBottom: 16,
-    textAlign: 'center',
-  },
-  subtitle: {
-    fontSize: 20,
-    marginVertical: 8,
-  },
-  questItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#ffffff',
-    padding: 16,
-    marginBottom: 8,
-    borderRadius: 8,
-    shadowColor: '#000',
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 2,
-  },
-  questText: {
-    fontSize: 18,
-    marginLeft: 8,
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    marginTop: 16,
-  },
-  button: {
-    backgroundColor: '#007bff',
-    padding: 16,
-    borderRadius: 8,
-  },
-  buttonText: {
-    color: '#ffffff',
-    fontSize: 18,
-    textAlign: 'center',
-  },
-});
 
 export default QuestsScreen;
