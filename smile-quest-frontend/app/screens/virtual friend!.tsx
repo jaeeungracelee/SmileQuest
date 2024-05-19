@@ -14,11 +14,13 @@ const ChatScreen: React.FC = () => {
     setMessages([...messages, newMessage]);
 
     try {
-      const response = await axios.post('http://localhost:3000/chat', { message: input });
+      const response = await axios.post('http://207.23.223.101:3000/chat', { message: input }); // Replace with your IP address
+      console.log('API response:', response.data); // Debug: Log the API response
       const botReply = { sender: 'bot', text: response.data.reply };
       setMessages((prevMessages) => [...prevMessages, botReply]);
     } catch (error) {
       console.error('Error communicating with chatbot:', error);
+      // You may want to display an error message in the UI here
     }
 
     setInput('');
@@ -27,17 +29,19 @@ const ChatScreen: React.FC = () => {
     }
   };
 
+  const renderItem = ({ item }: { item: { sender: string; text: string } }) => (
+    <View style={item.sender === 'user' ? styles.userMessage : styles.botMessage}>
+      <Text style={item.sender === 'user' ? styles.userText : styles.botText}>{item.text}</Text>
+    </View>
+  );
+
   const renderContent = () => (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.inner}>
         <FlatList
           data={messages}
           keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item }) => (
-            <View style={item.sender === 'user' ? styles.userMessage : styles.botMessage}>
-              <Text style={item.sender === 'user' ? styles.userText : styles.botText}>{item.text}</Text>
-            </View>
-          )}
+          renderItem={renderItem}
         />
         <View style={styles.inputContainer}>
           <TextInput
