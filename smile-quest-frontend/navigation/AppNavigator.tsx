@@ -3,13 +3,8 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import LoginScreen from '../app/screens/LoginScreen';
-import ChatScreen from '../app/screens/ChatScreen';
-
-type RootStackParamList = {
-  Login: undefined;
-  SignUp: undefined;
-  Chat: { username: string };
-};
+import ChatScreen from '../app/screens/virtual friend!';
+import { RootStackParamList } from './types';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
