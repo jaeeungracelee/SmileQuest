@@ -1,6 +1,7 @@
 {
   "dependencies": {
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "react-native-linear-gradient": "^2.8.3"
   },
   "devDependencies": {
     "@types/express": "^4.17.21"

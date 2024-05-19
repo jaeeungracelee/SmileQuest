@@ -1,6 +1,9 @@
 import express from "express";
 import axios from "axios";
 import { initializeApp } from "firebase/app";
+import cors from "cors";
+
+
 import dotenv from "dotenv";
 
 // Import necessary modules
@@ -17,8 +20,12 @@ increment,
 doc,
 } from "firebase/firestore";
 
+
 // Initialize Express app
 const app = express();
+
+app.use(cors());
+
 const port = process.env.PORT || 3000;
 
 // Middleware to parse JSON requests
