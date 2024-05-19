@@ -18,19 +18,25 @@ const PostItem = ({ post }: { post: { id: string, user: string, achievement: str
   <View style={styles.postItem}>
     <Text style={styles.postUser}>{post.user}</Text>
     <Text style={styles.postAchievement}>{post.achievement}</Text>
-    <Image source={post.image} style={styles.image} />
+    {post.image.startsWith && post.image.startsWith('file') ? (
+      <Image source={{ uri: post.image }} style={styles.image} />
+    ) : (
+      <Image source={post.image} style={styles.image} />
+    )}
   </View>
 );
 
-export default function ExploreScreen() {
+export default function ExploreScreen({ route }) {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+
+  const newPost = route.params?.newPost;
 
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>SmileQuest</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
       <FlatList
-        data={posts}
+        data={newPost ? posts.concat(newPost) : posts}
         renderItem={({ item }) => <PostItem post={item} />}
         keyExtractor={item => item.id}
         contentContainerStyle={styles.listContainer}
