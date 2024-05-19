@@ -2,7 +2,7 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import LoginScreen from '../app/screens/LoginScreen';
+import LoginScreen from '../app/screens/explore';
 import ChatScreen from '../app/screens/virtual friend!';
 import { RootStackParamList } from './types';
 
