@@ -5,10 +5,10 @@ import { useNavigation, NavigationProp } from '@react-navigation/native';
 import { RootStackParamList } from '../navigation/types';
 
 const posts = [
-  { id: '1', user: 'Alice', achievement: 'Touched grass' },
-  { id: '2', user: 'Bob', achievement: 'Did 5 push-ups' },
-  { id: '3', user: 'Charlie', achievement: 'Talked with parents about the day' },
-  { id: '4', user: 'Dana', achievement: 'Daily affirmation: "I am capable"' },
+  { id: '1', user: 'Grace', achievement: 'Touched grass' },
+  { id: '2', user: 'Jason', achievement: 'Did 5 push-ups' },
+  { id: '3', user: 'Carson', achievement: 'Talked with parents about the day' },
+  { id: '4', user: 'Bart', achievement: 'Daily affirmation: "I am capable"' },
   // Add more posts here...
 ];
 
@@ -32,6 +32,9 @@ export default function ExploreScreen() {
         keyExtractor={item => item.id}
         contentContainerStyle={styles.listContainer}
       />
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Weekly Leaderboard')}>
+        <Text style={styles.buttonText}>Go to LeaderBoard</Text>
+      </TouchableOpacity>
       <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Chat')}>
         <Text style={styles.buttonText}>Go to Chat</Text>
       </TouchableOpacity>

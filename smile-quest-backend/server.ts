@@ -1,6 +1,9 @@
 import express from "express";
 import axios from "axios";
 import { initializeApp } from "firebase/app";
+import cors from "cors";
+
+
 import dotenv from "dotenv";
 
 // Import necessary modules
@@ -17,8 +20,12 @@ increment,
 doc,
 } from "firebase/firestore";
 
+
 // Initialize Express app
 const app = express();
+
+app.use(cors());
+
 const port = process.env.PORT || 3000;
 
 // Middleware to parse JSON requests
@@ -36,11 +43,6 @@ const firebaseConfig = {
 const firebaseApp = initializeApp(firebaseConfig);
 var db = getFirestore(firebaseApp);
 
-const initialPrompt = {
-  role: 'system',
-  content: "Always respond as Smiley, a friendly and supportive virtual friend. Sound like a real person, not a robot! Provide empathetic, helpful, concise responses. Start now."
-};
-
 app.post('/chat', async (req, res) => {
   const { message } = req.body;
   
@@ -50,7 +52,6 @@ app.post('/chat', async (req, res) => {
       {
         model: 'gpt-3.5-turbo', // Use the new model
         messages: [
-          initialPrompt,  // Include the initial prompt
           { role: 'user', content: message },
         ],
         max_tokens: 150,
@@ -154,4 +155,3 @@ app.get("/viewLeaderboard", async (req, res) => {
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
-

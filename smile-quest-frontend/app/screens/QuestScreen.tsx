@@ -71,7 +71,7 @@ const QuestsScreen: React.FC = ({ navigation }) => {
         )}
       />
       <View style={externalStyles.buttonContainer}>
-        <TouchableOpacity style={externalStyles.button}>
+        <TouchableOpacity style={externalStyles.button} onPress={() => navigation.navigate('Camera')}>
           <Text style={externalStyles.buttonText}>Start Quest</Text>
         </TouchableOpacity>
       </View>

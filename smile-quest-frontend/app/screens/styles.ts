@@ -32,7 +32,7 @@ export const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 3,
     borderLeftWidth: 4,
-    borderColor: '#007bff',
+    borderColor: '#ffd400',
   },
   questText: {
     fontSize: 18,
