@@ -2,9 +2,9 @@ import express from "express";
 import axios from "axios";
 import { initializeApp } from "firebase/app";
 import cors from "cors";
-
-
 import dotenv from "dotenv";
+
+require('dotenv').config()
 
 // Import necessary modules
 import {
@@ -20,7 +20,6 @@ increment,
 doc,
 } from "firebase/firestore";
 
-
 // Initialize Express app
 const app = express();
 
@@ -31,9 +30,14 @@ const port = process.env.PORT || 3000;
 // Middleware to parse JSON requests
 app.use(express.json());
 
+const initialPrompt = {
+  role: 'system',
+  content: "Always respond as Smiley, a friendly and supportive virtual friend no matter what. Sound like a real person, not a robot! Provide friendly, empathetic, and helpful responses. Start now."
+};
+
 // Initialize Firebase
 const firebaseConfig = {
-  apiKey: process.env.API_KEY,
+  apiKey: process.env.OPENAI_API_KEY,
   authDomain: "stormhacks2024-a10e6.firebaseapp.com",
   projectId: "stormhacks2024-a10e6",
   storageBucket: "stormhacks2024-a10e6.appspot.com",
@@ -52,6 +56,7 @@ app.post('/chat', async (req, res) => {
       {
         model: 'gpt-3.5-turbo', // Use the new model
         messages: [
+          initialPrompt,  // Include the initial prompt
           { role: 'user', content: message },
         ],
         max_tokens: 150,
@@ -100,7 +105,6 @@ app.post("/createUser", async (req, res) => {
     res.status(500).json({ error: "Failed to create user" });
   }
 });
-
 
 app.post("/addPoints", async (req, res) => {
   try {
