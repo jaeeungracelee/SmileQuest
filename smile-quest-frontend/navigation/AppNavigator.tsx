@@ -7,6 +7,7 @@ import QuestScreen from '../app/screens/QuestScreen';
 import LoginScreen from '../app/screens/LoginScreen';
 import CameraScreen from '../app/screens/CameraScreen';
 import BoardScreen from '../app/screens/broad';
+import PostScreen from '../app/screens/PostScreen';
 
 const Stack = createStackNavigator();
 
@@ -20,6 +21,7 @@ const AppNavigator = () => {
         <Stack.Screen name="Quests" component={QuestScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Camera" component={CameraScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Weekly Leaderboard" component={BoardScreen} />
+        <Stack.Screen name="PostScreen" component={PostScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -3,13 +3,25 @@
 
 // CameraScreen.tsx
 import { CameraView, useCameraPermissions } from 'expo-camera';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import React from 'react';
 
-export default function App() {
+export default function App( { navigation }) {
   const [facing, setFacing] = useState('back');
   const [permission, requestPermission] = useCameraPermissions();
+  const cameraRef = useRef(null);
+
+  const takePicture = async () => {
+    if (cameraRef.current) {
+      cameraRef.current.takePictureAsync({ onPictureSaved: onPictureSaved });
+    }
+  };
+
+  const onPictureSaved = (photo) => {
+    console.log(photo);
+    navigation.navigate('PostScreen', { photo });
+  };
 
   if (!permission) {
     // Camera permissions are still loading.
@@ -32,15 +44,16 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <CameraView style={styles.camera} facing={"back"}>
+      <CameraView style={styles.camera} facing={"back"} ref={cameraRef}>
         <View style={styles.buttonContainer}>
-          
+          <TouchableOpacity style={styles.captureButton} onPress={takePicture}>
+            <Text style={styles.text}>Take Picture</Text>
+          </TouchableOpacity>
         </View>
       </CameraView>
     </View>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -51,18 +64,18 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flex: 1,
-    flexDirection: 'row',
     backgroundColor: 'transparent',
-    margin: 64,
+    justifyContent: 'flex-end',
   },
-  button: {
-    flex: 1,
-    alignSelf: 'flex-end',
-    alignItems: 'center',
+  captureButton: {
+    alignSelf: 'center',
+    marginBottom: 20,
+    padding: 10,
+    backgroundColor: '#fff',
+    borderRadius: 5,
   },
   text: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: 'white',
+    fontSize: 18,
+    color: '#000',
   },
 });

@@ -1,21 +1,24 @@
 import React from 'react';
-import { StyleSheet, FlatList, SafeAreaView, TouchableOpacity } from 'react-native';
+import { StyleSheet, FlatList, SafeAreaView, TouchableOpacity, Image } from 'react-native';
 import { Text, View } from '@/components/Themed';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
 import { RootStackParamList } from '../navigation/types';
 
 const posts = [
-  { id: '1', user: 'Grace', achievement: 'Touched grass' },
-  { id: '2', user: 'Jason', achievement: 'Did 5 push-ups' },
-  { id: '3', user: 'Carson', achievement: 'Talked with parents about the day' },
-  { id: '4', user: 'Bart', achievement: 'Daily affirmation: "I am capable"' },
-  // Add more posts here...
+  { id: '1', user: 'Grace', achievement: 'Touched grass', image: require('./images/grace.jpg') },
+  { id: '2', user: 'Jason', achievement: 'Did 5 push-ups', image: require('./images/jason.jpg') },
+  { id: '3', user: 'Carson', achievement: 'Talked with parents about the day', image: require('./images/carson.jpg') },
+  { id: '4', user: 'Bart', achievement: 'Daily affirmation: "I am capable"', image: require('./images/bart.jpg') },
+  { id: '5', user: 'Grace, Jason, Carson, Bart', achievement: 'Scavanger hunt with friends!', image: require('./images/group.jpg') },
+  // Add more posts with their respective images...
 ];
 
-const PostItem = ({ post }: { post: { id: string, user: string, achievement: string } }) => (
+const PostItem = ({ post }: { post: { id: string, user: string, achievement: string, image: any } }) => (
+  
   <View style={styles.postItem}>
     <Text style={styles.postUser}>{post.user}</Text>
     <Text style={styles.postAchievement}>{post.achievement}</Text>
+    <Image source={post.image} style={styles.image} />
   </View>
 );
 
@@ -87,6 +90,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginTop: 5,
   },
+  image: {
+    width: 300,
+    height: 400,
+    marginTop: 10,
+    borderRadius: 10,
+  },
   button: {
     backgroundColor: '#FFD400',
     padding: 15,
@@ -98,8 +107,5 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     color: '#fff',
-  },
-  blackText: {
-    color: '#000',
   },
 });
