@@ -2,9 +2,9 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamList } from '../../navigation/AppNavigator';
+import  AppNavigator  from '../../navigation/AppNavigator';
 
-type LoginScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Login'>;
+type LoginScreenNavigationProp = StackNavigationProp<AppNavigator, 'Login'>;
 
 type Props = {
   navigation: LoginScreenNavigationProp;
