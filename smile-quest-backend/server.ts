@@ -12,8 +12,7 @@ app.use(express.json());
 
 app.post('/chat', async (req, res) => {
   const { message } = req.body;
-  console.log('Received message:', message);
-
+  
   try {
     const response = await axios.post(
       'https://api.openai.com/v1/chat/completions', // Update the endpoint
