@@ -15,21 +15,23 @@ app.post('/chat', async (req, res) => {
 
   try {
     const response = await axios.post(
-      'https://api.openai.com/v1/completions',
+      'https://api.openai.com/v1/chat/completions', // Update the endpoint
       {
-        model: 'text-davinci-003', // specify the model name
-        prompt: message,
+        model: 'gpt-3.5-turbo', // Use the new model
+        messages: [
+          { role: 'user', content: message },
+        ],
         max_tokens: 150,
       },
       {
         headers: {
           'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
-          'Content-Type': 'application/json', // ensure content type is set
+          'Content-Type': 'application/json',
         },
       }
     );
 
-    res.json({ reply: response.data.choices[0].text.trim() });
+    res.json({ reply: response.data.choices[0].message.content.trim() });
   } catch (error) {
     console.error(error);
     if (axios.isAxiosError(error)) {
