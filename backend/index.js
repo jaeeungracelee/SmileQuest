@@ -1,5 +1,6 @@
 // Import necessary modules
 const express = require("express");
+const axios = require("axios");
 const { initializeApp } = require("firebase/app");
 const {
   getFirestore,
@@ -33,6 +34,37 @@ const firebaseConfig = {
 };
 const firebaseApp = initializeApp(firebaseConfig);
 var db = getFirestore(firebaseApp);
+
+app.post('/chat', async (req, res) => {
+  const { message } = req.body;
+  
+  try {
+    const response = await axios.post(
+      'https://api.openai.com/v1/chat/completions', // Update the endpoint
+      {
+        model: 'gpt-3.5-turbo', // Use the new model
+        messages: [
+          { role: 'user', content: message },
+        ],
+        max_tokens: 150,
+      },
+      {
+        headers: {
+          'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+
+    res.json({ reply: response.data.choices[0].message.content.trim() });
+  } catch (error) {
+    console.error('Error communicating with OpenAI API:', error);
+    if (axios.isAxiosError(error)) {
+      console.error('Axios error details:', error.response?.data);
+    }
+    res.status(500).send('Error communicating with OpenAI API');
+  }
+});
 
 // Route to handle user creation
 app.post("/createUser", async (req, res) => {
@@ -71,8 +103,6 @@ app.post("/addPoints", async (req, res) => {
     if (!name) {
       return res.status(400).json({ error: "Missing name" });
     }
-    console.log(name);
-    console.log(points);
     if (!points) {
       return res.status(400).json({ error: "Missing points" });
     }
@@ -91,6 +121,24 @@ app.post("/addPoints", async (req, res) => {
   } catch (error) {
     console.error("Error adding score:", error);
     res.status(500).json({ error: "Failed to add score" });
+  }
+});
+
+app.get("/viewLeaderboard", async (req, res) => {
+  try {
+    const usersRef = collection(db, "user");
+    const usersSnapshot = await getDocs(usersRef);
+
+    const users = [];
+    usersSnapshot.forEach((doc) => {
+      const user = doc.data();
+      users.push({ name: user.name, score: user.score });
+    });
+
+    res.status(200).json(users);
+  } catch (error) {
+    console.error("Error retrieving leaderboard:", error);
+    res.status(500).json({ error: "Failed to retrieve leaderboard" });
   }
 });
 
