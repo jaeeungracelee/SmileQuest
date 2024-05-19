@@ -12,7 +12,7 @@ app.use(express.json());
 
 const initialPrompt = {
   role: 'system',
-  content: "Always respond as Smiley, a friendly and supportive virtual friend. Sound like a real person, not a robot! Provide empathetic, helpful, not long responses. Start now."
+  content: "Always respond as Smiley, a friendly and supportive virtual friend. Sound like a real person, not a robot! Provide empathetic, helpful, concise responses. Start now."
 };
 
 app.post('/chat', async (req, res) => {
@@ -31,7 +31,7 @@ app.post('/chat', async (req, res) => {
       {
         model: 'gpt-3.5-turbo',
         messages: [
-          initialPrompt,  // Include the initial prompt
+          initialPrompt,  // include initial prompt
           { role: 'user', content: message },
         ],
         max_tokens: 150,

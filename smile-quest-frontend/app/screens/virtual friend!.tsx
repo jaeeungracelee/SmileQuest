@@ -1,7 +1,9 @@
-// screens/ChatScreen.tsx
 import React, { useState } from 'react';
-import { View, TextInput, FlatList, Text, StyleSheet, KeyboardAvoidingView, TouchableOpacity, Platform, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { View, TextInput, FlatList, Text, StyleSheet, KeyboardAvoidingView, TouchableOpacity, Platform, TouchableWithoutFeedback, Keyboard, Image } from 'react-native';
 import axios from 'axios';
+
+// Import the image
+const smileyImage = require('../../assets/images/smiley.png'); // Make sure the path is correct
 
 const ChatScreen: React.FC = () => {
   const [messages, setMessages] = useState<{ sender: string; text: string }[]>([]);
@@ -66,6 +68,7 @@ const ChatScreen: React.FC = () => {
         keyboardVerticalOffset={90}
       >
         <View style={styles.header}>
+          <Image source={smileyImage} style={styles.smileyImage} />
           <Text style={styles.headerText}>Smiley</Text>
         </View>
         {renderContent()}
@@ -73,6 +76,7 @@ const ChatScreen: React.FC = () => {
     ) : (
       <View style={styles.container}>
         <View style={styles.header}>
+          <Image source={smileyImage} style={styles.smileyImage} />
           <Text style={styles.headerText}>Smiley</Text>
         </View>
         {renderContent()}
@@ -90,10 +94,12 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   header: {
-    paddingTop: Platform.OS === 'ios' ? 50 : 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: Platform.OS === 'ios' ? 20 : 20,
     paddingBottom: 20,
     backgroundColor: '#fff',
-    alignItems: 'center',
     borderBottomWidth: 1,
     borderBottomColor: '#ddd',
   },
@@ -101,6 +107,11 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     color: '#000',
+    marginLeft: 10, // Adjust spacing between the image and text
+  },
+  smileyImage: {
+    width: 90, // Increased width
+    height: 90, // Increased height
   },
   inputContainer: {
     flexDirection: 'row',
