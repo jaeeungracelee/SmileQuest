@@ -2,5 +2,7 @@
 export type RootStackParamList = {
     Login: undefined;
     SignUp: undefined;
-    Chat: { username: string };
+    Explore: undefined;
+    Chat: undefined;
+    Quests: undefined;
   };

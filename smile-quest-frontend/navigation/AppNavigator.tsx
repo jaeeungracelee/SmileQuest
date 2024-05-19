@@ -1,20 +1,21 @@
-// navigation/AppNavigator.tsx
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import LoginScreen from '../app/screens/explore';
-import ChatScreen from '../app/screens/virtual friend!';
-import { RootStackParamList } from './types';
+import ExploreScreen from '../app/screens/ExploreScreen';
+import ChatScreen from '../app/screens/ChatScreen';
+import QuestScreen from '../app/screens/QuestScreen';
+import LoginScreen from '../app/screens/LoginScreen';
 
-const Stack = createStackNavigator<RootStackParamList>();
+const Stack = createStackNavigator();
 
 const AppNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login">
         <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
-        <Stack.Screen name="Chat" component={ChatScreen} />
-        {/* Add other screens here */}
+        <Stack.Screen name="Explore" component={ExploreScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Chat" component={ChatScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Quests" component={QuestScreen} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

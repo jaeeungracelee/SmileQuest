@@ -1,6 +1,8 @@
 import React from 'react';
-import { StyleSheet, FlatList, SafeAreaView } from 'react-native';
+import { StyleSheet, FlatList, SafeAreaView, TouchableOpacity } from 'react-native';
 import { Text, View } from '@/components/Themed';
+import { useNavigation, NavigationProp } from '@react-navigation/native';
+import { RootStackParamList } from '../navigation/types';
 
 const posts = [
   { id: '1', user: 'Alice', achievement: 'Touched grass' },
@@ -17,7 +19,9 @@ const PostItem = ({ post }: { post: { id: string, user: string, achievement: str
   </View>
 );
 
-export default function TabOneScreen() {
+export default function ExploreScreen() {
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>SmileQuest</Text>
@@ -28,6 +32,12 @@ export default function TabOneScreen() {
         keyExtractor={item => item.id}
         contentContainerStyle={styles.listContainer}
       />
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Chat')}>
+        <Text style={styles.buttonText}>Go to Chat</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Quests')}>
+        <Text style={styles.buttonText}>Go to Quests</Text>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 }
@@ -73,6 +83,18 @@ const styles = StyleSheet.create({
   postAchievement: {
     fontSize: 16,
     marginTop: 5,
+  },
+  button: {
+    backgroundColor: '#FFD400',
+    padding: 15,
+    borderRadius: 10,
+    marginVertical: 10,
+    alignItems: 'center',
+  },
+  buttonText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#fff',
   },
   blackText: {
     color: '#000',

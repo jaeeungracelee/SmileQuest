@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { View, TextInput, FlatList, Text, StyleSheet, KeyboardAvoidingView, TouchableOpacity, Platform, TouchableWithoutFeedback, Keyboard, Image } from 'react-native';
 import axios from 'axios';
+import { useNavigation } from '@react-navigation/native';
 
 // Import the image
 const smileyImage = require('../../assets/images/smiley.png'); // Make sure the path is correct
 
-const ChatScreen: React.FC = () => {
+export default function ChatScreen({ navigation }) {
+  navigation = useNavigation();
   const [messages, setMessages] = useState<{ sender: string; text: string }[]>([]);
   const [input, setInput] = useState<string>('');
 
@@ -68,6 +70,9 @@ const ChatScreen: React.FC = () => {
         keyboardVerticalOffset={90}
       >
         <View style={styles.header}>
+          <TouchableOpacity onPress={() => navigation.navigate('Explore')} style={styles.backButton}>
+            <Text style={styles.backButtonText}>←</Text>
+          </TouchableOpacity>
           <Image source={smileyImage} style={styles.smileyImage} />
           <Text style={styles.headerText}>Smiley</Text>
         </View>
@@ -76,6 +81,9 @@ const ChatScreen: React.FC = () => {
     ) : (
       <View style={styles.container}>
         <View style={styles.header}>
+          <TouchableOpacity onPress={() => navigation.navigate('Explore')} style={styles.backButton}>
+            <Text style={styles.backButtonText}>←</Text>
+          </TouchableOpacity>
           <Image source={smileyImage} style={styles.smileyImage} />
           <Text style={styles.headerText}>Smiley</Text>
         </View>
@@ -102,6 +110,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderBottomWidth: 1,
     borderBottomColor: '#ddd',
+  },
+  backButton: {
+    position: 'absolute',
+    left: 10,
+    padding: 10,
+  },
+  backButtonText: {
+    color: '#FFD400', // Yellow color for back button
+    fontSize: 24,
   },
   headerText: {
     fontSize: 24,
@@ -161,5 +178,3 @@ const styles = StyleSheet.create({
     color: '#000', // Black text for bot messages
   },
 });
-
-export default ChatScreen;
