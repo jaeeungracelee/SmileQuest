@@ -12,6 +12,7 @@ app.use(express.json());
 
 app.post('/chat', async (req, res) => {
   const { message } = req.body;
+  console.log('Received message:', message);
 
   try {
     const response = await axios.post(
@@ -24,14 +25,15 @@ app.post('/chat', async (req, res) => {
       {
         headers: {
           'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
-          'Content-Type': 'application/json', // ensure content type is set
+          'Content-Type': 'application/json',
         },
       }
     );
 
+    console.log('OpenAI response:', response.data);
     res.json({ reply: response.data.choices[0].text.trim() });
   } catch (error) {
-    console.error(error);
+    console.error('Error communicating with OpenAI API:', error);
     if (axios.isAxiosError(error)) {
       console.error('Axios error details:', error.response?.data);
     }
