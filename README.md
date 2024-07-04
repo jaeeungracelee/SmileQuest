@@ -1,3 +1,18 @@
+<h1>SmileQuest App</h1>
+
+<div align="center">
+  <img src="https://github.com/jaeeungracelee/SmileQuest/assets/155155813/3996f4c1-12ee-4d88-a26a-913881d58585" alt="login" width="400"/>
+  <img src="https://github.com/jaeeungracelee/SmileQuest/assets/155155813/66d27589-ed20-4947-90c2-49d03660e1cd" alt="explore" width="400"/>
+</div>
+<div align="center">
+  <img src="https://github.com/jaeeungracelee/SmileQuest/assets/155155813/c707ed06-8c24-46c3-85ab-a560ba11051f" alt="tasklist" width="400"/>
+  <img src="https://github.com/jaeeungracelee/SmileQuest/assets/155155813/6f79799d-498f-4e0f-875c-c2a75b1af13a" alt="smiley chatbot" width="400"/>
+</div>
+<div align="center">
+  <img src="https://github.com/jaeeungracelee/SmileQuest/assets/155155813/86b97799-6207-462e-8928-fc10011d54c5" alt="leaderboard" width="400"/>
+  <img src="https://github.com/jaeeungracelee/SmileQuest/assets/155155813/a50ead23-9553-47cc-9f93-c226a274c4c8" alt="completing tasks" width="400"/>
+</div>
+
 ## Inspiration 🌟
 
 As university students, we deal with so much academic stress and career pressure. Sadly, we often neglect our mental health and social interactions. We wanted to create an app that not only encourages a positive lifestyle, but also brings back the sense of community that we all need.
