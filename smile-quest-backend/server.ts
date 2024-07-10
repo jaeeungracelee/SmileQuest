@@ -6,7 +6,7 @@ import dotenv from "dotenv";
 
 require('dotenv').config()
 
-// Import necessary modules
+// import necessary modules
 import {
 getFirestore,
 collection,
@@ -20,14 +20,13 @@ increment,
 doc,
 } from "firebase/firestore";
 
-// Initialize Express app
+// express
 const app = express();
 
 app.use(cors());
 
 const port = process.env.PORT || 3000;
 
-// Middleware to parse JSON requests
 app.use(express.json());
 
 const initialPrompt = {
@@ -35,7 +34,7 @@ const initialPrompt = {
   content: "Always respond as Smiley, a friendly and supportive virtual friend no matter what. Sound like a real person, not a robot! Provide friendly, empathetic, and helpful responses. Start now."
 };
 
-// Initialize Firebase
+// firebase
 const firebaseConfig = {
   apiKey: process.env.OPENAI_API_KEY,
   authDomain: "stormhacks2024-a10e6.firebaseapp.com",
@@ -52,11 +51,11 @@ app.post('/chat', async (req, res) => {
   
   try {
     const response = await axios.post(
-      'https://api.openai.com/v1/chat/completions', // Update the endpoint
+      'https://api.openai.com/v1/chat/completions', // update endpoint
       {
-        model: 'gpt-3.5-turbo', // Use the new model
+        model: 'gpt-3.5-turbo', // use the new model
         messages: [
-          initialPrompt,  // Include the initial prompt
+          initialPrompt,  // include the initial prompt
           { role: 'user', content: message },
         ],
         max_tokens: 150,
@@ -79,13 +78,13 @@ app.post('/chat', async (req, res) => {
   }
 });
 
-// Route to handle user creation
+// route to handle user creation
 app.post("/createUser", async (req, res) => {
   try {
-    // Extract user information from the request body
+    // extract user information from the request body
     const { name, password, email, score } = req.body;
 
-    // Validate user data (you can add more robust validation here)
+    // validate user data (you can add more robust validation here)
     if (!name || !password || !email || !score) {
       return res.status(400).json({ error: "Missing required fields" });
     }
@@ -96,7 +95,7 @@ app.post("/createUser", async (req, res) => {
       email,
       score,
     });
-    // Send success response
+    // send success response
     res
       .status(201)
       .json({ message: "User created successfully"});
@@ -108,10 +107,10 @@ app.post("/createUser", async (req, res) => {
 
 app.post("/addPoints", async (req, res) => {
   try {
-    // Extract user information from the request body
+    // extract user information from the request body
     const { name, points } = req.body;
 
-    // Validate user data (you can add more robust validation here)
+    // validate user data (you can add more robust validation here)
     if (!name) {
       return res.status(400).json({ error: "Missing name" });
     }
@@ -121,12 +120,12 @@ app.post("/addPoints", async (req, res) => {
 
     const queryRef = doc(db, "user", name);
 
-    // Set the "capital" field of the city 'DC'
+    // set the "capital" field of the city 'DC'
     await updateDoc(queryRef, {
       score: increment(points),
     });
 
-    // Send success response
+    // send success response
     res
       .status(200)
       .json({ message: "Score added successfully", userId: queryRef.id });
@@ -141,7 +140,7 @@ app.get("/viewLeaderboard", async (req, res) => {
     const usersRef = collection(db, "user");
     const usersSnapshot = await getDocs(usersRef);
 
-    const users: { name: string, score: number }[] = []; // Define the type of the users array
+    const users: { name: string, score: number }[] = []; // define the type of the users array
 
     usersSnapshot.forEach((doc) => {
       const user = doc.data();
@@ -155,7 +154,7 @@ app.get("/viewLeaderboard", async (req, res) => {
   }
 });
 
-// Start the server
+// start the server
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
