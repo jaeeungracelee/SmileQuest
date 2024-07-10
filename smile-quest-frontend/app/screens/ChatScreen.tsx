@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
 
 // Import the image
-const smileyImage = require('../../assets/images/smiley.png'); // Make sure the path is correct
+const smileyImage = require('../../assets/images/smiley.png');
 
 export default function ChatScreen({ navigation }) {
   navigation = useNavigation();
@@ -18,13 +18,12 @@ export default function ChatScreen({ navigation }) {
     setMessages([...messages, newMessage]);
 
     try {
-      const response = await axios.post('http://207.23.223.101:3000/chat', { message: input }); // Replace with your IP address
-      console.log('API response:', response.data); // Debug: Log the API response
+      const response = await axios.post('http://207.23.223.101:3000/chat', { message: input }); // replace with your IP address
+      console.log('API response:', response.data); // debug: log the API response
       const botReply = { sender: 'bot', text: response.data.reply };
       setMessages((prevMessages) => [...prevMessages, botReply]);
     } catch (error) {
       console.error('Error communicating with chatbot:', error);
-      // You may want to display an error message in the UI here
     }
 
     setInput('');
@@ -117,18 +116,18 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   backButtonText: {
-    color: '#FFD400', // Yellow color for back button
+    color: '#FFD400', // yellow for back button
     fontSize: 24,
   },
   headerText: {
     fontSize: 24,
     fontWeight: 'bold',
     color: '#000',
-    marginLeft: 10, // Adjust spacing between the image and text
+    marginLeft: 10, // spacing between the image and text
   },
   smileyImage: {
-    width: 90, // Increased width
-    height: 90, // Increased height
+    width: 90, 
+    height: 90, 
   },
   inputContainer: {
     flexDirection: 'row',
@@ -145,7 +144,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   sendButton: {
-    backgroundColor: '#FFD400', // Yellow background for send button
+    backgroundColor: '#FFD400', // yellow background for send button
     borderRadius: 30,
     padding: 10,
   },
@@ -155,7 +154,7 @@ const styles = StyleSheet.create({
   },
   userMessage: {
     alignSelf: 'flex-end',
-    backgroundColor: '#FFD400', // Yellow background for user messages
+    backgroundColor: '#FFD400', // yellow background for user messages
     borderRadius: 8,
     padding: 8,
     marginVertical: 4,
@@ -172,9 +171,9 @@ const styles = StyleSheet.create({
     marginRight: 50,
   },
   userText: {
-    color: '#000', // Black text for user messages
+    color: '#000', // black text for user messages
   },
   botText: {
-    color: '#000', // Black text for bot messages
+    color: '#000', // black text for bot messages
   },
 });

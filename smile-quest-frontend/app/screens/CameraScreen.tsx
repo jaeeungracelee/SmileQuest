@@ -24,12 +24,12 @@ export default function App( { navigation }) {
   };
 
   if (!permission) {
-    // Camera permissions are still loading.
+    // camera permissions!
     return <View />;
   }
 
   if (!permission.granted) {
-    // Camera permissions are not granted yet.
+    // no permission rip
     return (
       <View style={styles.container}>
         <Text style={{ textAlign: 'center' }}>We need your permission to show the camera</Text>

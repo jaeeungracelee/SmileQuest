@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   backButtonText: {
-    color: '#FFD400', // Yellow color for back button
+    color: '#FFD400', // yellow for back button
     fontSize: 24,
   },
   headerText: {

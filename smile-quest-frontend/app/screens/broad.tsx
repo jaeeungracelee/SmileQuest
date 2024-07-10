@@ -35,7 +35,6 @@ const updatePosts = async (): Promise<Post[]> => {
   }
 };
 
-
 const PostItem = ({ post }: { post: Post }) => (
   <View style={styles.postItem}>
      <View style={styles.postItemContent}>
@@ -48,19 +47,17 @@ const PostItem = ({ post }: { post: Post }) => (
   </View>
 );
 
-
-
 export default function TabOneScreen() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
-  const [dataFetched, setDataFetched] = useState(false); // New state variable
+  const [dataFetched, setDataFetched] = useState(false); // new state variable
 
   const fetchData = async () => {
     try {
       const leaderboardData = await updatePosts();
       console.log(leaderboardData);
       setPosts(leaderboardData);
-      setDataFetched(true); // Update dataFetched state to true after setting posts
+      setDataFetched(true); // update dataFetched state to true after setting posts
     } catch (error) {
       console.error('Error fetching leaderboard:', error);
     } finally {
@@ -69,13 +66,13 @@ export default function TabOneScreen() {
   };
 
   useEffect(() => {
-    fetchData(); // Fetch data initially
+    fetchData(); // fetch data initially
 
     const intervalId = setInterval(() => {
-      fetchData(); // Fetch data periodically
-    }, 5000); // Refresh every 5 seconds (adjust as needed)
+      fetchData(); // fetch data periodically
+    }, 5000); // refresh every 5 seconds (adjust as needed)
 
-    return () => clearInterval(intervalId); // Cleanup interval on unmount
+    return () => clearInterval(intervalId); // cleanup interval on unmount
   }, []);
 
   if (loading) {
@@ -87,7 +84,7 @@ export default function TabOneScreen() {
   }
 
   if (!dataFetched) {
-    return null; // Return null if data fetching is not completed
+    return null; // return null if data fetching is not completed
   }
 
   return (
@@ -137,23 +134,23 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 3.84,
     elevation: 5,
-    paddingHorizontal: 20, // Padding for the entire item
+    paddingHorizontal: 20, // padding for the entire item
   },
   postItemContent: {
     backgroundColor: '#FFD400',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingVertical: 6, // Vertical padding for the content
-    paddingHorizontal: 60, // Horizontal padding for the content
+    paddingVertical: 6, // vertical padding for the content
+    paddingHorizontal: 60, // horizontal padding for the content
   },
   postItemVert: {
     backgroundColor: '#FFD400',
     flexDirection: 'column',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingVertical: 6, // Vertical padding for the content
-    paddingHorizontal: 60, // Horizontal padding for the content
+    paddingVertical: 6, // vertical padding for the content
+    paddingHorizontal: 60, // horizontal padding for the content
   },
   postRank: {
     fontSize: 36,

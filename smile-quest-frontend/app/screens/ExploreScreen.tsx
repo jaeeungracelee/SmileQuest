@@ -10,7 +10,7 @@ const posts = [
   { id: '3', user: 'Carson', achievement: 'Talked with parents about the day', image: require('./images/carson.jpg') },
   { id: '4', user: 'Bart', achievement: 'Daily affirmation: "I am capable"', image: require('./images/bart.jpg') },
   { id: '5', user: 'Grace, Jason, Carson, Bart', achievement: 'Scavanger hunt with friends!', image: require('./images/group.jpg') },
-  // Add more posts with their respective images...
+  // add more posts with their respective images...
 ];
 
 const PostItem = ({ post }: { post: { id: string, user: string, achievement: string, image: any } }) => (
