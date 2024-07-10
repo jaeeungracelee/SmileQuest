@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, FlatList, SafeAreaView, ActivityIndicator } from 'react-native';
 import axios from "axios";
 import { Text, View } from '@/components/Themed';
-import LinearGradient from 'react-native-linear-gradient';
 
 type LeaderboardEntry = {
   name: string;
